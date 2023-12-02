@@ -48,3 +48,23 @@ jobs:
             cd ReactNodeTesting
             lsof -t -i:3000 | xargs kill -9
             nohup node index.js &
+  run_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run API tests
+        run: npm run test-API
+
+      - name: Run React tests
+        run: npm run test-react
