@@ -25,6 +25,7 @@ jobs:
             sudo apt install -y npm nodejs
             git clone https://github.com/sameerarifk/ReactNodeTesting.git
             cd ReactNodeTesting
+            lsof -t -i:3000 | xargs kill -9
             nohup node index.js &
 
   deploy_main:
@@ -45,4 +46,5 @@ jobs:
             sudo apt install -y npm nodejs
             git clone https://github.com/sameerarifk/ReactNodeTesting.git
             cd ReactNodeTesting
+            lsof -t -i:3000 | xargs kill -9
             nohup node index.js &
