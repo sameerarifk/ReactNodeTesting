@@ -14,49 +14,45 @@ jobs:
 
     steps:
       - name: Set up SSH for Assignment Server
-        uses: webfactory/ssh-agent@v0.5.0
+        uses: appleboy/ssh-action@master
         with:
-          ssh-private-key: ${{ secrets.ASSIGNMENT_SERVER_SSH_PRIVATE_KEY }}
-
-      - name: Install Dependencies for Assignment
-        run: |
-          sudo apt update
-          sudo apt install -y npm nodejs
-          git clone https://github.com/sameerarifk/ReactNodeTesting.git
-          cd ReactNodeTesting
-          npm install react-scripts --save
-          npm update
-          npm install --save-dev react-scripts@latest
-          npm update
-          npm install jest
-
-      - name: Build and Run for Assignment
-        run: |
-          npm run build-react
-          node index.js
+          host: ${{ secrets.ASSIGNMENT_SERVER_IP }}
+          username: ${{ secrets.ASSIGNMENT_SERVER_USERNAME }}
+          key: ${{ secrets.ASSIGNMENT_SERVER_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            sudo apt update
+            sudo apt install -y npm nodejs
+            git clone https://github.com/sameerarifk/ReactNodeTesting.git
+            cd ReactNodeTesting
+            npm install react-scripts --save
+            npm update
+            npm install --save-dev react-scripts@latest
+            npm update
+            npm install jest
+            npm run build-react
+            node index.js
 
   deploy_staging:
     runs-on: ubuntu-latest
 
     steps:
       - name: Set up SSH for Staging Server
-        uses: webfactory/ssh-agent@v0.5.0
+        uses: appleboy/ssh-action@master
         with:
-          ssh-private-key: ${{ secrets.STAGING_SERVER_SSH_PRIVATE_KEY }}
-
-      - name: Install Dependencies for Staging
-        run: |
-          sudo apt update
-          sudo apt install -y npm nodejs
-          git clone https://github.com/sameerarifk/ReactNodeTesting.git
-          cd ReactNodeTesting
-          npm install react-scripts --save
-          npm update
-          npm install --save-dev react-scripts@latest
-          npm update
-          npm install jest
-
-      - name: Build and Run for Staging
-        run: |
-          npm run build-react
-          node index.js
+          host: ${{ secrets.STAGING_SERVER_IP }}
+          username: ${{ secrets.STAGING_SERVER_USERNAME }}
+          key: ${{ secrets.STAGING_SERVER_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            sudo apt update
+            sudo apt install -y npm nodejs
+            git clone https://github.com/sameerarifk/ReactNodeTesting.git
+            cd ReactNodeTesting
+            npm install react-scripts --save
+            npm update
+            npm install --save-dev react-scripts@latest
+            npm update
+            npm install jest
+            npm run build-react
+            node index.js
