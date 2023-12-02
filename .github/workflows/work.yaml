@@ -21,7 +21,7 @@ jobs:
           host: ${{ secrets.ASSIGNMENT_SERVER_IP }}
           username: ${{ secrets.ASSIGNMENT_SERVER_USERNAME }}
           key: ${{ secrets.ASSIGNMENT_SERVER_SSH_PRIVATE_KEY }}
-          port: ${{ secrets.ASSIGNMENT_SERVER_SSH_PORT }}
+          port: 22
           script: |
             sudo apt update
             sudo apt install -y npm nodejs
@@ -47,7 +47,7 @@ jobs:
           host: ${{ secrets.STAGING_SERVER_IP }}
           username: ${{ secrets.STAGING_SERVER_USERNAME }}
           key: ${{ secrets.STAGING_SERVER_SSH_PRIVATE_KEY }}
-          port: ${{ secrets.STAGING_SERVER_SSH_PORT }}
+          port: 22
           script: |
             sudo apt update
             sudo apt install -y npm nodejs
