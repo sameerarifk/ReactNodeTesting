@@ -12,6 +12,8 @@ jobs:
   deploy_assignment:
     runs-on: ubuntu-latest
 
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.ref == 'assignment'
+
     steps:
       - name: Set up SSH for Assignment Server
         uses: appleboy/ssh-action@master
@@ -19,7 +21,7 @@ jobs:
           host: ${{ secrets.ASSIGNMENT_SERVER_IP }}
           username: ${{ secrets.ASSIGNMENT_SERVER_USERNAME }}
           key: ${{ secrets.ASSIGNMENT_SERVER_SSH_PRIVATE_KEY }}
-          port: 22
+          port: ${{ secrets.ASSIGNMENT_SERVER_SSH_PORT }}
           script: |
             sudo apt update
             sudo apt install -y npm nodejs
@@ -33,8 +35,10 @@ jobs:
             npm run build-react
             node index.js
 
-  deploy_staging:
+  deploy_main:
     runs-on: ubuntu-latest
+
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:
       - name: Set up SSH for Staging Server
@@ -43,7 +47,7 @@ jobs:
           host: ${{ secrets.STAGING_SERVER_IP }}
           username: ${{ secrets.STAGING_SERVER_USERNAME }}
           key: ${{ secrets.STAGING_SERVER_SSH_PRIVATE_KEY }}
-          port: 22
+          port: ${{ secrets.STAGING_SERVER_SSH_PORT }}
           script: |
             sudo apt update
             sudo apt install -y npm nodejs
