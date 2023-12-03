@@ -5,7 +5,7 @@ var request = require('supertest')(app);
 // To hit production AWS!
 // var request = require('supertest')('https://www.mydomain.com/');
 
-// run locally, like in vscode debugger and test against that
+// run locally, like in vscode debugger and teagainst that
 // var request = require('supertest')('http://localhost:3000');
 
 
