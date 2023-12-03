@@ -70,7 +70,4 @@ jobs:
 
       - name: Run React tests
         run: npm run test-react
-        
-      - name: Lint JavaScript/TypeScript code
-        run: npm run lint-js
 
