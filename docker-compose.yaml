@@ -5,7 +5,7 @@ services:
     image: reactapp
     ports:
       - 3000:3000
-    command: npx nodemon index.js
+    command: node index.js
     volumes:
       - .:/ReactApp
 
