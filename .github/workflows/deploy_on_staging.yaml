@@ -56,7 +56,9 @@ jobs:
           username: ubuntu
           key: ${{ secrets.STAGING_SERVER_SSH_PRIVATE_KEY }}
           port: 22
-          script: npm install
+          script: |
+              sudo apt install -y npm nodejs
+              npm install
           
       - name: Installing Docker on Stagging Server
         uses: appleboy/ssh-action@v1.0.0
